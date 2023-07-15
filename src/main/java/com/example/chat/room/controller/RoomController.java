@@ -16,8 +16,8 @@ public class RoomController {
     private final RoomService service;
 
     @PostMapping
-    public void joinRoom(@RequestBody RoomRequest request) {
-        service.joinRoom(request);
+    public void createRoom(@RequestBody RoomRequest request) {
+        service.createRoom(request);
     }
 
     @GetMapping
@@ -31,7 +31,7 @@ public class RoomController {
     }
 
     @DeleteMapping("{id}")
-    public void leaveRoom(@PathVariable("id") Long id) {
-        service.leaveRoom(id);
+    public void deleteRoom(@PathVariable("id") Long id) {
+        service.deleteRoom(id);
     }
 }

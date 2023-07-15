@@ -29,5 +29,5 @@ public class User {
     private List<Room> rooms;
 
     @OneToMany(mappedBy = "user")
-    private List<Message> messages;
+    private List<Message> messagesRooms;
 }

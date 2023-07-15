@@ -1,6 +1,12 @@
 package com.example.chat.user.service;
 
+import com.example.chat.message.domain.entity.Message;
+import com.example.chat.message.repository.MessageRepository;
+import com.example.chat.room.domain.entity.Room;
+import com.example.chat.room.repository.RoomRepository;
 import com.example.chat.user.domain.entity.User;
+import com.example.chat.user.domain.request.ConnectRequest;
+import com.example.chat.user.domain.request.LoginRequest;
 import com.example.chat.user.domain.request.UserRequest;
 import com.example.chat.user.domain.response.UserResponse;
 import com.example.chat.user.repository.UserRepository;
@@ -19,6 +25,9 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoomRepository roomRepository;
+
+    private final MessageRepository messageRepository;
 
     //TODO: CRUD
 
@@ -34,7 +43,7 @@ public class UserService {
 
     public UserResponse findById(Long id) {
         Optional<User> byId = userRepository.findById(id);
-        User user = byId.orElseThrow(() -> new RuntimeException("NOT FOUND MEMBER BY " + id));
+        User user = byId.orElseThrow(() -> new RuntimeException("NOT FOUND USER BY " + id));
         return new UserResponse(user);
     }
 
@@ -50,4 +59,35 @@ public class UserService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
+
+    public void joinRoom(ConnectRequest request) {
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("NOT FOUND USER BY " + request.userId()));
+        Room room = roomRepository.findById(request.roomId()).orElseThrow(() -> new RuntimeException("NOT FOUND ROOM BY " + request.roomId()));
+
+        user.getRooms().add(room);
+        userRepository.save(user);
+    }
+
+    public void leaveRoom(ConnectRequest request) {
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("NOT FOUND USER BY " + request.userId()));
+        Room room = roomRepository.findById(request.roomId()).orElseThrow(() -> new RuntimeException("NOT FOUND ROOM BY " + request.roomId()));
+
+        user.getRooms().remove(room);
+        userRepository.save(user);
+
+        List<Message> messages = messageRepository.findByUserAndRoom(user, room);
+        messageRepository.deleteAll(messages);
+    }
+
+    public User login(LoginRequest request) {
+        Optional<User> byEmail = userRepository.findByEmail(request.email());
+        User user = byEmail.orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(request.password())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user;
+    }
+
 }

@@ -16,7 +16,7 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-   public void joinRoom(RoomRequest request) {
+   public void createRoom(RoomRequest request) {
        roomRepository.save(request.toEntity());
    }
 
@@ -31,7 +31,7 @@ public class RoomService {
        return new RoomResponse(room);
    }
 
-   public void leaveRoom(Long id) {
+   public void deleteRoom(Long id) {
        roomRepository.deleteById(id);
    }
 }

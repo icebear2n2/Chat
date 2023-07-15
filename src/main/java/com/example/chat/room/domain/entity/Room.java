@@ -30,5 +30,5 @@ public class Room {
     private List<User> users;
 
     @OneToMany(mappedBy = "room")
-    private List<Message> messages;
+    private List<Message> messagesUsers;
 }

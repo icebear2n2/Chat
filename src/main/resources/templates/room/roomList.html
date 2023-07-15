@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Rooms</title>
+</head>
+
+<body>
+<h1>Chat Rooms</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Room Name</th>
+    <th>Created At</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Iterate over the room list -->
+  <tr th:each="room : ${rooms}">
+    <td th:text="${room.id}"></td>
+    <td th:text="${room.roomName}"></td>
+<!--    <td th:text="${room.createdAt}"></td>-->
+    <td>
+      <!-- Add join button for each room -->
+      <form th:action="@{/user/join/{id}(id=${room.id})}" method="post">
+        <input type="hidden" name="userId" th:value="${userId}" />
+        <button type="submit">Join</button>
+      </form>
+      <form th:action="@{/rooms/delete/{id}(id=${room.id})}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>
