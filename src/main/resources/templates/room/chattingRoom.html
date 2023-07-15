@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Websocket Tutorial</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -17,13 +17,16 @@
         </div>
         <ul id="msgArea" class="messages">
         </ul>
+
         <div class="footer">
             <div id="opinion" class="text-box" contenteditable="true" disabled="true" onkeyup="enterkey()"></div>
         </div>
+
+
     </div>
 </div>
 <!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script  src="./js/script.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script  src="../js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 </body>
@@ -153,6 +156,7 @@
 
         document.getElementById("msgArea").scrollTop = document.getElementById("msgArea").scrollHeight;
     }
+
 </script>
 <style>
     .text-box div:nth-child(n+1) {

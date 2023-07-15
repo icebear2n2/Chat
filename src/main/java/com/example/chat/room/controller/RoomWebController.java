@@ -1,25 +1,28 @@
 package com.example.chat.room.controller;
 
+import com.example.chat.room.domain.entity.Room;
+import com.example.chat.room.domain.request.RoomRequest;
 import com.example.chat.room.domain.response.RoomResponse;
+import com.example.chat.room.repository.RoomRepository;
 import com.example.chat.room.service.RoomService;
+import com.example.chat.user.domain.entity.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-//@RequestMapping("/room")
-@RequestMapping("/")
+@RequestMapping("/room")
+//@RequestMapping("/")
 public class RoomWebController {
 
     private final RoomService service;
-    @GetMapping("room")
+    private final RoomRepository roomRepository;
+    @GetMapping
     public String getRoomList(Model model, HttpSession session) {
         List<RoomResponse> all = service.findAll();
         Long userId = (Long) session.getAttribute("userId");
@@ -43,7 +46,35 @@ public class RoomWebController {
         // 예를 들어, 특정 조건에 따라 허용된 채팅방만 접근하도록 할 수 있습니다.
 
         model.addAttribute("name", username);
+        model.addAttribute("id", id);
         return "/room/chattingRoom";
+    }
+
+    @GetMapping("/create")
+    public String getCreateRoom(Model model) {
+        return "/room/createRoom";
+    }
+
+    @PostMapping("/create")
+    public String createRoom(@ModelAttribute RoomRequest request, HttpSession session) {
+        if (request.maxCapacity() <= 0) {
+            throw new IllegalArgumentException("Max capacity must be greater than 0.");
+        }
+
+        service.createRoom(request);
+
+        return "redirect:/room";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteRoom(@PathVariable("id") Long id, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        service.deleteRoom(id);
+        return "redirect:/room";
     }
 
 

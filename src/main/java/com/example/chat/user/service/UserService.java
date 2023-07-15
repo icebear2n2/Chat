@@ -1,7 +1,7 @@
 package com.example.chat.user.service;
 
-import com.example.chat.message.domain.entity.Message;
-import com.example.chat.message.repository.MessageRepository;
+//import com.example.chat.message.domain.entity.Message;
+//import com.example.chat.message.repository.MessageRepository;
 import com.example.chat.room.domain.entity.Room;
 import com.example.chat.room.repository.RoomRepository;
 import com.example.chat.user.domain.entity.User;
@@ -27,7 +27,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
 
-    private final MessageRepository messageRepository;
+//    private final MessageRepository messageRepository;
 
     //TODO: CRUD
 
@@ -50,7 +50,7 @@ public class UserService {
     public UserResponse update(Long id, UserRequest request) {
         Optional<User> byId = userRepository.findById(id);
         if (byId.isEmpty()) throw  new RuntimeException("없는 유저를 수정하려 합니다.");
-        User user = new User(id, request.email(), request.username(), null, null, null, null);
+        User user = new User(id, request.email(), request.username(), null, null, null);
         User save = userRepository.save(user);
 
         return new UserResponse(save);
@@ -74,9 +74,9 @@ public class UserService {
 
         user.getRooms().remove(room);
         userRepository.save(user);
-
-        List<Message> messages = messageRepository.findByUserAndRoom(user, room);
-        messageRepository.deleteAll(messages);
+//
+//        List<Message> messages = messageRepository.findByUserAndRoom(user, room);
+//        messageRepository.deleteAll(messages);
     }
 
     public User login(LoginRequest request) {

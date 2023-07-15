@@ -74,16 +74,15 @@ public class UserWebController {
         ConnectRequest connectRequest = new ConnectRequest(userId, id);
         try {
             service.joinRoom(connectRequest);
-            return "redirect:/{id}";
+            return "redirect:/room/{id}";
         } catch (RuntimeException e) {
             // joinRoom에서 예외가 발생한 경우 처리할 로직 작성
             // 예를 들어 에러 페이지를 표시하거나 다른 페이지로 리다이렉트할 수 있습니다.
             return "redirect:/error";
         }
+
+
     }
-
-
-
 
 
 }

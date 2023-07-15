@@ -1,6 +1,6 @@
 package com.example.chat.room.domain.entity;
 
-import com.example.chat.message.domain.entity.Message;
+//import com.example.chat.message.domain.entity.Message;
 import com.example.chat.user.domain.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,9 @@ public class Room {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roomName;
+    private int maxCapacity;
     private Timestamp createdAt;
+
 
     @ManyToMany
     @JoinTable(name = "user_room",
@@ -29,6 +31,6 @@ public class Room {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-    @OneToMany(mappedBy = "room")
-    private List<Message> messagesUsers;
+//    @OneToMany(mappedBy = "room")
+//    private List<Message> messagesUsers;
 }
