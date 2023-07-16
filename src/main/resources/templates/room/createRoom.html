@@ -1,27 +1,162 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Create Room</title>-->
+
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            background: url(https://github.com/icebear2n2/Chat/assets/87232411/8c4fa463-7ecd-42bc-ba5b-37ffba5fa6df);-->
+<!--        }-->
+
+<!--        .header {-->
+<!--            background-color: #333;-->
+<!--            padding: 10px;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        .header ul {-->
+<!--            list-style-type: none;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        .header ul li {-->
+<!--            margin-right: 10px;-->
+<!--        }-->
+
+<!--        .header ul li a {-->
+<!--            color: #fff;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            margin: 40px auto;-->
+<!--            padding: 20px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            background-color: #fff;-->
+<!--        }-->
+
+<!--        .container h1 {-->
+<!--            font-size: 24px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .form-group label {-->
+<!--            display: block;-->
+<!--            font-weight: bold;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        .form-group input {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        .form-group button {-->
+<!--            background-color: #333;-->
+<!--            color: #fff;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="header">-->
+<!--    <ul>-->
+<!--        <li th:text="${username}"></li>-->
+<!--        <li><a href="/room">메인</a></li>-->
+<!--        <li><a href="/user/logout">로그아웃</a></li>-->
+
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--    <h1>Create Room</h1>-->
+
+<!--    <form th:action="@{/room/create}" method="post">-->
+<!--        <div class="form-group">-->
+<!--            <label for="roomName">Room Name:</label>-->
+<!--            <input type="text" id="roomName" name="roomName" required/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="maxCapacity">Max Capacity:</label>-->
+<!--            <input type="number" id="maxCapacity" name="maxCapacity" required min="1" max="5"/>-->
+<!--        </div>-->
+
+<!--        <button type="submit">Create Room</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Create Room</title>
+    <meta charset="UTF-8">
+    <title>Create Room</title>
+    <meta name="description" content="Login - Register Template">
+    <meta name="author" content="Lorenzo Angelino aka MrLolok">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            background: url(https://github.com/icebear2n2/Chat/assets/87232411/f574d81a-80a3-4f7e-8bd5-236a222cad67);
+        }
+    </style>
 </head>
 
 <body>
-<h1>Create Room</h1>
+<div id="container-login">
+    <div id="title">
+        <i class="material-icons lock">lock</i> Create Room
+    </div>
 
-<form th:action="@{/room/create}" method="post">
-  <div>
-    <label for="roomName">Room Name:</label>
-    <input type="text" id="roomName" name="roomName" required />
-  </div>
+    <form method="post" action="/room/create">
+        <div class="input" style="margin-top: 50px">
+            <div class="input-addon">
+                <span class="material-symbols-outlined">
+                room_preferences
+                </span>
+            </div>
+            <input id="roomName" placeholder="Room Name" name="roomName" type="text" required class="validate">
+        </div>
 
-  <div>
-    <label for="maxCapacity">Max Capacity:</label>
-    <input type="number" id="maxCapacity" name="maxCapacity" required min="1" />
-  </div>
+        <div class="clearfix"></div>
 
-  <button type="submit">Create Room</button>
-</form>
+
+        <div>
+            <input type="number" id="maxCapacity" name="maxCapacity" required min="1" max="5"/>
+        </div>
+        <div class="clearfix"></div>
+        <input type="submit" style="margin: auto;
+    width: 240px;
+    border-radius: 4px;
+    background-color: #373b3d;
+    padding: 8px 0px;
+    margin-top: 50px;" value="Create"/>
+    </form>
+</div>
 </body>
 
 </html>

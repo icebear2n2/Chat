@@ -81,6 +81,14 @@ public class UserWebController {
 
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
 
+        if (userId != null) {
+            session.invalidate();
+        }
+        return "redirect:/user/login";
+    }
 
 }

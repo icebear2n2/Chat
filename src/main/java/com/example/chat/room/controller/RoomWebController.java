@@ -26,9 +26,10 @@ public class RoomWebController {
     public String getRoomList(Model model, HttpSession session) {
         List<RoomResponse> all = service.findAll();
         Long userId = (Long) session.getAttribute("userId");
-
+        String username = (String) session.getAttribute("username");
         model.addAttribute("rooms", all);
         model.addAttribute("userId", userId);
+        model.addAttribute("username", username);
         return "/room/roomList";
     }
 
@@ -51,15 +52,14 @@ public class RoomWebController {
     }
 
     @GetMapping("/create")
-    public String getCreateRoom(Model model) {
+    public String getCreateRoom(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        model.addAttribute("username", username);
         return "/room/createRoom";
     }
 
     @PostMapping("/create")
-    public String createRoom(@ModelAttribute RoomRequest request, HttpSession session) {
-        if (request.maxCapacity() <= 0) {
-            throw new IllegalArgumentException("Max capacity must be greater than 0.");
-        }
+    public String createRoom(@ModelAttribute RoomRequest request) {
 
         service.createRoom(request);
 
@@ -71,5 +71,7 @@ public class RoomWebController {
         service.deleteRoom(id);
         return "redirect:/room";
     }
+
+
 
 }

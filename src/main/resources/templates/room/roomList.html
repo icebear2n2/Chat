@@ -2,48 +2,161 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Rooms</title>
+    <meta charset="UTF-8">
+    <title>Chat Rooms</title>
+    <meta name="description" content="Login - Register Template">
+    <meta name="author" content="Lorenzo Angelino aka MrLolok">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url(https://github.com/icebear2n2/Chat/assets/87232411/cc74235a-0b9d-4521-89b3-7cee10ba1aa3);
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            color: #F2F2F2;
+        }
+
+        .container-room {
+            background-color: #1D1F20;
+            position: relative;
+            top: 20%;
+            margin: auto;
+            width: 800px;
+            height: 500px;
+            border-radius: 0.35em;
+            box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .container-room h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .container-room .spacing {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container-room table {
+            width: 90%;
+            margin: auto;
+            position: center;
+            text-align: center;
+            border-collapse: collapse;
+            border-radius: 0.35em;
+            box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+        }
+
+        .container-room th,
+        .container-room td {
+            border: 1px solid #373b3d;
+            padding: 8px;
+            position: center;
+            text-align: center;
+        }
+
+        .container-room th {
+            background-color: #1D1F20;
+            position: center;
+            text-align: center;
+        }
+
+        .container-room td button {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .container-room td button:hover {
+            background-color: #555;
+        }
+
+        .header ul li {
+            margin-right: 10px;
+        }
+
+        .header ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 
 <body>
-<h1>Chat Rooms</h1>
+<div class="header">
+    <ul>
+        <li th:text="${username}"></li>
+        <li><a href="/user/logout">로그아웃</a></li>
 
-<!-- Add create room button -->
-<form th:action="@{/room/create}" method="get">
-  <button type="submit">Create Room</button>
-</form>
+    </ul>
+</div>
 
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Room Name</th>
-    <th>Max Capacity</th>
-    <th>Current Users</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- Iterate over the room list -->
-  <tr th:each="room : ${rooms}">
-    <td th:text="${room.getId()}"></td>
-    <td th:text="${room.getRoomName()}"></td>
-    <td th:text="${room.getMaxCapacity()}"></td>
-    <td th:text="${room.getUsers().size()}"></td>
-    <td>
-      <!-- Add join button for each room -->
-      <form th:action="@{/user/join/{id}(id=${room.getId()})}" method="post">
-        <input type="hidden" name="userId" th:value="${userId}" />
-        <button type="submit" th:if="${room.getUsers().size() != room.getMaxCapacity()}">Join</button>
-      </form>
-      <form th:action="@{/room/delete/{id}(id=${room.getId()})}" method="post">
-        <button type="submit">Delete</button>
-      </form>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container-room">
+    <h1>Chat Rooms</h1>
+
+    <!-- Add create room button -->
+    <div class="spacing">
+        <form th:action="@{/room/create}" method="get">
+            <button style="     background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer" type="submit">Create Room
+            </button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Room Name</th>
+            <th>Max Capacity</th>
+            <th>Current Users</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the room list -->
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.getId()}"></td>
+            <td th:text="${room.getRoomName()}"></td>
+            <td th:text="${room.getMaxCapacity()}"></td>
+            <td th:text="${room.getUsers().size()}"></td>
+            <td>
+                <!-- Add join button for each room -->
+                <form th:action="@{/user/join/{id}(id=${room.getId()})}" method="post">
+                    <input type="hidden" name="userId" th:value="${userId}"/>
+                    <button type="submit">Join</button>
+                </form>
+                <form th:action="@{/room/delete/{id}(id=${room.getId()})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 
 </html>

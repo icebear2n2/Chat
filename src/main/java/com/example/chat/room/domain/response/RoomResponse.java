@@ -5,11 +5,13 @@ import com.example.chat.room.domain.entity.Room;
 import com.example.chat.user.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class RoomResponse {
     private Long id;
     private String roomName;

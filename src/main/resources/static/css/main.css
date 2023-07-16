@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+
 body {
     margin: 0;
     padding: 0;
@@ -7,6 +8,18 @@ body {
 }
 
 #container-login {
+    background-color: #1D1F20;
+    position: relative;
+    top: 20%;
+    margin: auto;
+    width: 340px;
+    height: 445px;
+    border-radius: 0.35em;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+#container-room {
     background-color: #1D1F20;
     position: relative;
     top: 20%;
@@ -41,8 +54,8 @@ body {
 }
 
 .lock {
-	position: relative;
-	top: 2px;
+    position: relative;
+    top: 2px;
 }
 
 .input {
@@ -164,6 +177,17 @@ input[type=submit] {
     cursor: pointer;
     border-radius: 3px;
 }
+
+input[type=number] {
+    color: #949494;
+    background-color: #373b3d;
+    border: 1px solid #373b3d;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-top: 30px;
+
+}
+
 
 .register {
     margin: auto;
