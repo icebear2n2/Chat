@@ -35,7 +35,7 @@ public class UserWebController {
             service.save(request);
             return "redirect:/user/login";
         } catch (RuntimeException e) {
-            result.rejectValue("email", "error email", "FAILED TO SIGNUP USER!! : " +  e.getMessage());
+            result.rejectValue("email", "error email", "FAILED TO SIGNUP USER!! : " + e.getMessage());
             return "/user/signup";
         }
     }
@@ -46,7 +46,7 @@ public class UserWebController {
     }
 
     @PostMapping("/login")
-    public String  login(@ModelAttribute("user") @Validated LoginRequest request, HttpSession session, BindingResult result) {
+    public String login(@ModelAttribute("user") @Validated LoginRequest request, HttpSession session, BindingResult result) {
         if (result.hasErrors()) {
 
             return "/user/login";
@@ -79,6 +79,24 @@ public class UserWebController {
         }
 
 
+    }
+
+    @PostMapping("/leave/{id}")
+    public String leaveRoom(@PathVariable("id") Long id, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/user/login";
+        }
+
+        ConnectRequest connectRequest = new ConnectRequest(userId, id);
+        try {
+            service.leaveRoom(connectRequest);
+
+            return "redirect:/room";
+        } catch (RuntimeException e) {
+
+            return "redirect:/error";
+        }
     }
 
     @GetMapping("/logout")

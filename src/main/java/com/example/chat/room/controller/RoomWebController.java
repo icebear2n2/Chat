@@ -22,6 +22,7 @@ public class RoomWebController {
 
     private final RoomService service;
     private final RoomRepository roomRepository;
+
     @GetMapping
     public String getRoomList(Model model, HttpSession session) {
         List<RoomResponse> all = service.findAll();
@@ -34,7 +35,7 @@ public class RoomWebController {
     }
 
     @GetMapping("{id}")
-    public String chattingRoom(@PathVariable String id, Model model, HttpSession session) {
+    public String chattingRoom(@PathVariable Long id, Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         String username = (String) session.getAttribute("username");
         if (userId == null) {
@@ -61,17 +62,17 @@ public class RoomWebController {
     @PostMapping("/create")
     public String createRoom(@ModelAttribute RoomRequest request) {
 
-        service.createRoom(request);
+        Room room = service.createRoom(request);
 
-        return "redirect:/room";
+        Long roomId = room.getId();
+
+        return "redirect:/room/" + roomId;
     }
 
     @PostMapping("/delete/{id}")
     public String deleteRoom(@PathVariable("id") Long id) {
+        
         service.deleteRoom(id);
         return "redirect:/room";
     }
-
-
-
 }

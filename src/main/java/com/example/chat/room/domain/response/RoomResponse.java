@@ -1,6 +1,7 @@
 package com.example.chat.room.domain.response;
 
 //import com.example.chat.message.domain.entity.Message;
+
 import com.example.chat.room.domain.entity.Room;
 import com.example.chat.user.domain.entity.User;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class RoomResponse {
 
 
     private List<User> users;
+
 
     public RoomResponse(Room room) {
         this.id = room.getId();

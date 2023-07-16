@@ -16,23 +16,24 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-   public void createRoom(RoomRequest request) {
-       roomRepository.save(request.toEntity());
-   }
+    public Room createRoom(RoomRequest request) {
+        return roomRepository.save(request.toEntity());
 
-   public List<RoomResponse> findAll() {
-       List<Room> all = roomRepository.findAll();
-       return all.stream().map(RoomResponse::new).toList();
-   }
+    }
 
-   public RoomResponse findById(Long id) {
-       Optional<Room> byId = roomRepository.findById(id);
-       Room room = byId.orElseThrow(() -> new RuntimeException("NOT FOUND ROOM BY " + id));
-       return new RoomResponse(room);
-   }
+    public List<RoomResponse> findAll() {
+        List<Room> all = roomRepository.findAll();
+        return all.stream().map(RoomResponse::new).toList();
+    }
 
-   public void deleteRoom(Long id) {
-       roomRepository.deleteById(id);
-   }
+    public RoomResponse findById(Long id) {
+        Optional<Room> byId = roomRepository.findById(id);
+        Room room = byId.orElseThrow(() -> new RuntimeException("NOT FOUND ROOM BY " + id));
+        return new RoomResponse(room);
+    }
+
+    public void deleteRoom(Long id) {
+        roomRepository.deleteById(id);
+    }
 
 }

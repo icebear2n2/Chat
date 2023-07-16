@@ -24,7 +24,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
     // 현재 연결된 웹소켓 세션을 저장하는 컬렉션
     // 중복된 세션을 허용하지 않는다 -> 최대 3개까지 저장 가능
-    private static LinkedHashSet<WebSocketSession> numSet = new LinkedHashSet();
+    private static LinkedHashSet<WebSocketSession> numSet = new LinkedHashSet<>();
 
     public ChatHandler() {
     }
@@ -36,7 +36,7 @@ public class ChatHandler extends TextWebSocketHandler {
         // 현재 연결된 세션의 수가 3개 이상인 경우 가장 오래된 세션을 제거 후,
         // 새로운 세션에게 "채팅 종료" 메시지 전송
         if (numSet.size() >= 5) {
-            WebSocketSession oldSession = (WebSocketSession)numSet.iterator().next();
+            WebSocketSession oldSession = numSet.iterator().next();
             oldSession.sendMessage(new TextMessage("채팅이 종료되었습니다."));
             numSet.remove(numSet.iterator().next());
         }
@@ -47,8 +47,8 @@ public class ChatHandler extends TextWebSocketHandler {
 
 
         WebSocketSession sess;
-        while(var4.hasNext()) {
-            sess = (WebSocketSession)var4.next();
+        while (var4.hasNext()) {
+            sess = (WebSocketSession) var4.next();
             if (sess.getId().equals(session.getId())) {
                 isSessionAlive = true;
             }
@@ -57,8 +57,8 @@ public class ChatHandler extends TextWebSocketHandler {
         if (isSessionAlive) {
             var4 = numSet.iterator();
 
-            while(var4.hasNext()) {
-                sess = (WebSocketSession)var4.next();
+            while (var4.hasNext()) {
+                sess = (WebSocketSession) var4.next();
                 sess.sendMessage(message);
             }
         }

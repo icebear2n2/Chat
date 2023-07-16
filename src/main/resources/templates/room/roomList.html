@@ -126,11 +126,42 @@
         </form>
     </div>
 
+    <!--    <table>-->
+    <!--        <thead>-->
+    <!--        <tr>-->
+    <!--            <th>ID</th>-->
+    <!--            <th>Room Name</th>-->
+    <!--            <th>Max Capacity</th>-->
+    <!--            <th>Current Users</th>-->
+    <!--            <th>Actions</th>-->
+    <!--        </tr>-->
+    <!--        </thead>-->
+    <!--        <tbody>-->
+    <!--        &lt;!&ndash; Iterate over the room list &ndash;&gt;-->
+    <!--        <tr th:each="room : ${rooms}">-->
+    <!--            <td th:text="${room.getId()}"></td>-->
+    <!--            <td th:text="${room.getRoomName()}"></td>-->
+    <!--            <td th:text="${room.getMaxCapacity()}"></td>-->
+    <!--            <td th:text="${room.getUsers().size()}"></td>-->
+    <!--            <td>-->
+    <!--                &lt;!&ndash; Add join button for each room &ndash;&gt;-->
+    <!--                <form th:action="@{/user/join/{id}(id=${room.getId()})}" method="post">-->
+    <!--                    <input type="hidden" name="userId" th:value="${userId}"/>-->
+    <!--                    <button type="submit">Join</button>-->
+    <!--                </form>-->
+    <!--                <form th:action="@{/room/delete/{id}(id=${room.getId()})}" method="post">-->
+    <!--                    <button type="submit">Delete</button>-->
+    <!--                </form>-->
+    <!--            </td>-->
+    <!--        </tr>-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+
+
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Room Name</th>
+            <th>방 제목</th>
             <th>Max Capacity</th>
             <th>Current Users</th>
             <th>Actions</th>
@@ -139,7 +170,6 @@
         <tbody>
         <!-- Iterate over the room list -->
         <tr th:each="room : ${rooms}">
-            <td th:text="${room.getId()}"></td>
             <td th:text="${room.getRoomName()}"></td>
             <td th:text="${room.getMaxCapacity()}"></td>
             <td th:text="${room.getUsers().size()}"></td>
@@ -156,6 +186,7 @@
         </tr>
         </tbody>
     </table>
+
 </div>
 </body>
 
