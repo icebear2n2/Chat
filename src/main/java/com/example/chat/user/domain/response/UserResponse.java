@@ -16,19 +16,5 @@ public class UserResponse {
         this.id = user.getId();
         this.email = user.getEmail();
         this.username = user.getUsername();
-//        this.rooms = user.getMessagesRooms().stream().map(Message::getRoom).map(RoomDto::new).toList();
     }
-
-
-//    @Getter
-//    @AllArgsConstructor
-//    class RoomDto {
-//        private Long id;
-//        private String roomName;
-//
-//        public RoomDto(Room room) {
-//            this.id = room.getId();
-//            this.roomName = room.getRoomName();
-//        }
-//    }
 }

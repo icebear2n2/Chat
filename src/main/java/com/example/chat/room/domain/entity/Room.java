@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Room {
     private Long id;
     private String roomName;
     private int maxCapacity;
+    @CreationTimestamp
     private Timestamp createdAt;
 
 
@@ -31,6 +33,4 @@ public class Room {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-//    @OneToMany(mappedBy = "room")
-//    private List<Message> messagesUsers;
 }

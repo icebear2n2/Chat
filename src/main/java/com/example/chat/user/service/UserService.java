@@ -27,7 +27,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
 
-//    private final MessageRepository messageRepository;
 
     //TODO: CRUD
 
@@ -74,9 +73,7 @@ public class UserService {
 
         user.getRooms().remove(room);
         userRepository.save(user);
-//
-//        List<Message> messages = messageRepository.findByUserAndRoom(user, room);
-//        messageRepository.deleteAll(messages);
+
     }
 
     public User login(LoginRequest request) {

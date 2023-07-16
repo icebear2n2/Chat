@@ -16,8 +16,8 @@ public class RoomResponse {
 
     private int maxCapacity;
 
+
     private List<User> users;
-//    private List<UserDto> users;
 
     public RoomResponse(Room room) {
         this.id = room.getId();

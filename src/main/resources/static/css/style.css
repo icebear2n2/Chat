@@ -4,8 +4,12 @@
 }
 
 body {
-  background: skyblue;
+  background: url(https://github.com/icebear2n2/Chat/assets/87232411/816428a8-cddd-4255-bff4-9eec0acaa1a3);
   font: 12px/16px "Noto Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .floating-chat {

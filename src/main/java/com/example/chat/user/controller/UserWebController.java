@@ -66,8 +66,6 @@ public class UserWebController {
     public String joinRoom(@PathVariable("id") Long id, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
-            // 세션에 userId가 없는 경우 처리할 로직 작성
-            // 예를 들어 로그인 페이지로 리다이렉트 또는 에러 페이지를 표시할 수 있습니다.
             return "redirect:/user/login";
         }
 
@@ -76,13 +74,13 @@ public class UserWebController {
             service.joinRoom(connectRequest);
             return "redirect:/room/{id}";
         } catch (RuntimeException e) {
-            // joinRoom에서 예외가 발생한 경우 처리할 로직 작성
-            // 예를 들어 에러 페이지를 표시하거나 다른 페이지로 리다이렉트할 수 있습니다.
+
             return "redirect:/error";
         }
 
 
     }
+
 
 
 }

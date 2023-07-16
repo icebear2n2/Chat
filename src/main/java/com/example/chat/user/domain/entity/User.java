@@ -4,6 +4,7 @@ package com.example.chat.user.domain.entity;
 import com.example.chat.room.domain.entity.Room;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -22,7 +23,10 @@ public class User {
     private String email;
     private String username;
     private String password;
+    @CreationTimestamp
     private Timestamp createdAt;
+
+
 
     @ManyToMany
     @JoinTable(name = "user_room",
@@ -30,6 +34,4 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "room_id"))
     private List<Room> rooms;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Message> messagesRooms;
 }

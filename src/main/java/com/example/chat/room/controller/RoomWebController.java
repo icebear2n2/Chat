@@ -67,15 +67,9 @@ public class RoomWebController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteRoom(@PathVariable("id") Long id, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            return "redirect:/login";
-        }
-
+    public String deleteRoom(@PathVariable("id") Long id) {
         service.deleteRoom(id);
         return "redirect:/room";
     }
-
 
 }
